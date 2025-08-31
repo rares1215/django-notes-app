@@ -63,7 +63,7 @@
 ## 🚀 Installation & Setup
 
 ```bash
-1 git clone https://github.com/yourusername/NotesApp.git
+1 git clone https://github.com/rares1215/NotesApp.git
   cd NotesApp
 2 python -m venv .venv
   source venv/bin/activate  #On Windows use `.venv\Scripts\activate`
