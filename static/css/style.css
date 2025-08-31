@@ -1,0 +1,671 @@
+/* ---------- Reset & Base ---------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #FFF2E0, #E6E9F5);
+    color: #2d3748;
+    line-height: 1.6;
+}
+
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f') center/cover no-repeat;
+    min-height: 70vh;
+    padding: 60px 0;
+}
+
+.hero-section h1 {
+    animation: fadeInDown 1s ease;
+}
+
+.hero-section p {
+    animation: fadeInUp 1.2s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.features-section .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.features-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Nav bar */
+.navbar {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 1rem 2rem;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Brand / Logo */
+.navbar-brand {
+    color: #4c63c7 !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #6a7fdb !important;
+}
+
+/* Navigation links */
+.navbar-nav {
+    display: flex;
+    gap: 2rem;
+    /* spatiere uniforma */
+}
+
+.navbar-nav .nav-link {
+    color: #f1f5f9 !important;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    color: #ffffff !important;
+}
+
+/* Active link */
+.navbar-nav .nav-link.active {
+    color: #ffffff !important;
+    font-weight: 600;
+    background: rgba(108, 99, 255, 0.4);
+    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+}
+
+/* Dropdown styling */
+.nav-item .dropdown-menu {
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    padding: 0.6rem 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dropdown-item {
+    font-weight: 500;
+    color: #1f2937;
+    padding: 12px 20px;
+    transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Mobile toggler */
+.navbar-toggler {
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.logout-btn {
+    background: #8A89C0;
+    /* mov navbar */
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #6C69A6;
+    /* mai închis */
+    transform: translateY(-2px);
+}
+
+
+/* Container central pentru pagini */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ---------- Home Page ---------- */
+.home-page-div {
+    text-align: center;
+    margin-top: 6rem;
+}
+
+.home-page-div h1 {
+    color: #2d3748;
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #C0C9EE, #6a7fdb);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Notes Page ---------- */
+.notes-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.notes-header h1 {
+    font-size: 2.2rem;
+    color: #2d3748;
+}
+
+/* Grid de note */
+.notes-list {
+    display: grid;
+    gap: 20px;
+}
+
+/* Card de notă */
+.note-card,
+.single-note-div {
+    background: #ffffff;
+    margin: 1rem;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+}
+
+.note-card:hover,
+.single-note-div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Titlu + dată */
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.note-header h2 {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #2d3748;
+}
+
+.note-date {
+    font-size: 0.9rem;
+    color: #718096;
+}
+
+/* Conținut */
+.note-content {
+    margin: 10px 0 20px;
+    font-size: 1rem;
+    color: #4a5568;
+}
+
+.note-actions .btn {
+    margin-bottom: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.note-actions .btn:hover {
+    transform: translateY(-5px);
+}
+
+.btn-pin {
+    background-color: #ffc107;
+    /* un galben frumos */
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-pin:hover {
+    background-color: #e0a800;
+    transform: translateY(-5px);
+}
+
+/* Make note-actions buttons inline */
+.note-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.note-actions form,
+.note-actions a {
+    margin: 0;
+    /* remove default margins */
+    display: inline-block;
+    /* ensure forms and links behave inline */
+}
+
+
+
+.dashbord-container {
+    margin-bottom: 10rem;
+    margin-top: 5rem;
+    /* padding: 2rem; */
+}
+
+.dashbord-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.dash-card {
+    background-color: #cfd9ff;
+    opacity: 85%;
+    min-width: 100px;
+}
+
+.dash-card h5 {
+    color: rgb(104, 103, 103);
+    opacity: 90%;
+}
+
+.dash-card p {
+    color: rgb(255, 255, 255);
+}
+
+/* ---------- Formular Add/Edit ---------- */
+.form-page {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ---------- Form Styles ---------- */
+.form-card {
+    background: #fdf3e6;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 550px;
+    margin: auto;
+}
+
+.form-card h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #2d3748;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Icon pentru titlu */
+.form-card h1 .icon {
+    font-size: 2.2rem;
+    color: #6a7fdb;
+}
+
+/* Labels */
+.form-card label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+}
+
+/* Input & Textarea */
+.form-card input[type="text"],
+.form-card textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2d3748;
+    background: #f9fafb;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-card input[type="text"]:focus,
+.form-card textarea:focus {
+    outline: none;
+    border-color: #6a7fdb;
+    box-shadow: 0 0 0 3px rgba(106, 127, 219, 0.25);
+}
+
+/* Textarea resize control */
+.form-card textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Save Button */
+.form-card button {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #6a7fdb, #4c63c7);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.form-card button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(to right, #5b6ed8, #3949ab);
+}
+
+
+
+.category-actions {
+    display: flex;
+    gap: 1.2rem;
+    /* spatiu intre iconite */
+}
+
+.action-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.action-icon:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.action-icon.edit {
+    color: #6c63ff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    /* mov elegant pentru edit */
+}
+
+.action-icon.delete {
+    color: #e63946;
+    font-size: 1.2rem;
+    /* roșu curat pentru delete */
+}
+
+
+.action-icon {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    border-radius: 6px;
+    padding: 4px 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.action-icon:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.15);
+}
+
+/* search bar centrat */
+.search-bar {
+    flex-grow: 1;
+    /* ocupă spațiu central */
+    display: flex;
+    justify-content: center;
+}
+
+/* input elegant, rotunjit */
+.search-input {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    color: beige;
+    font-size: 0.95rem;
+    transition: background 0.3s, width 0.3s;
+    width: 220px;
+}
+
+/* focus -> mai lat și mai luminos */
+.search-input:focus {
+    background: rgba(255, 255, 255, 0.35);
+    width: 280px;
+}
+
+.search-input::placeholder {
+    color: beige;
+}
+
+/* buton icon discret */
+.search-btn {
+    background: none;
+    border: none;
+    margin-left: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.search-btn:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+
+/* Container full-page */
+
+.auth-body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #EAEAFD 0%, #D6D6F7 50%, #B8B8F3 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+}
+
+/* Card principal */
+.auth-card {
+    background: rgba(255, 255, 255, 0.8);
+    /* semi-transparent */
+    backdrop-filter: blur(12px);
+    /* blur pentru efect de sticlă */
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+
+/* Titlu */
+.auth-card h1 {
+    color: #6B6BCF;
+    /* mov/violet */
+    margin-bottom: 0.5rem;
+    font-size: 2.5em;
+}
+
+/* Subtitlu */
+.subtitle {
+    opacity: 90%;
+    color: #777;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* Form styling */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.auth-form label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 0.3rem;
+}
+
+.auth-form input {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #C9C9F5;
+    /* gri-mov subtil */
+    outline: none;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+    border-color: #6B6BCF;
+    box-shadow: 0 0 8px rgba(107, 107, 207, 0.3);
+}
+
+/* Button */
+.auth-btn {
+    background: #898AC4;
+    /* violet principal */
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.auth-btn:hover {
+    background: #7071B8;
+    transform: translateY(-2px);
+}
+
+/* Redirect link */
+.redirect-text {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.redirect-text a {
+    color: #6B6BCF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.redirect-text a:hover {
+    text-decoration: underline;
+}
+
+.auth-card .helptext,
+.auth-card ul {
+    font-size: 0.8rem;
+    opacity: 80%;
+    color: #777;
+    margin-top: 0.3rem;
+    line-height: 1.3;
+}
+
+/* //////////////////////// messages */
+
+.toast {
+    border-radius: 10px;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

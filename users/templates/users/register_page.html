@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register User
+{% endblock title %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Create Account</h1>
+        <p class="subtitle">Join us and keep organized notes on what you re doing!</p>
+
+        <form action="{% url 'users:register-user' %}" method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="auth-btn">Register</button>
+        </form>
+
+        <p class="redirect-text">
+            Already have an account? 
+            <a href="{% url 'users:login-user' %}">Login here</a>
+        </p>
+    </div>
+</div>
+{% endblock content %}

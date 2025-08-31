@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Notes Page
+{% endblock title %}
+
+{% block content %}
+<div class="notes-container">
+    <div class = 'dashbord-container'>
+        <h1><i class="bi bi-bar-chart-fill"></i>Dashbord</h1>
+        <div class="row mb-4">
+        <div class=" col-12 col-sm-6 col-md-3">
+            <div class="card text-center shadow-sm">
+            <div class="card-body dash-card">
+                <h5 class="card-title">Total Notes</h5>
+                <p class="display-6">{{ total_notes }}</p>
+            </div>
+            </div>
+        </div>
+        <div class=" col-12 col-sm-6 col-md-3">
+            <div class="card text-center shadow-sm">
+            <div class="card-body dash-card">
+                <h5 class="card-title">Pinned</h5>
+                <p class="display-6">{{ pinned_notes }}</p>
+            </div>
+            </div>
+        </div>
+        <div class=" col-12 col-sm-6 col-md-3">
+            <div class="card text-center shadow-sm">
+            <div class="card-body dash-card">
+                <h5 class="card-title">Favorites</h5>
+                <p class="display-6">{{ favorite_notes }}</p>
+            </div>
+            </div>
+        </div>
+        <div class=" col-12 col-sm-6 col-md-3">
+            <div class="card text-center shadow-sm">
+            <div class="card-body dash-card">
+                <h5 class="card-title">Categories</h5>
+                <p class="display-6">{{ total_categories }}</p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="notes-header">
+        <h1><i class="bi bi-journal-bookmark-fill"></i> Your Notes</h1>
+        <a href="{% url 'notes:add-note' %}" class="btn btn-primary"><i class="bi bi-patch-plus-fill"></i> Add Note</a>
+    </div>
+
+    <div class="notes-list">
+
+        <!-- Toasts container -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="toast align-items-center text-bg-{{ message.tags }} border-0 mb-2"
+                    role="alert" aria-live="assertive" aria-atomic="true"
+                    data-bs-delay="4000" data-bs-autohide="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% for note in notes %}
+            <div class="note-card">
+                <div class="note-header">
+                    <h2>{{ note.title }}</h2>
+                    <span class="note-date">{{ note.date|date:"M d, Y H:i" }}</span>
+                </div>
+                <p class="note-content">{{ note.content }}</p>
+
+                <div class="note-actions">
+
+                    <!-- Delete button triggers modal -->
+                    <button type="button" class="btn btn-danger" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#deleteModal" 
+                            data-note-id="{{ note.id }}"
+                            data-note-title = "{{note.title}}"
+                            >
+                        <i class="bi bi-trash-fill"></i> Delete
+                    </button>
+
+                    <a href="{% url 'notes:update-note' note.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i> Edit</a>
+                    
+                    <form action="{% url 'notes:pin-note' note.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-pin">
+                            {% if note.is_pinned %}<i class="bi bi-pin-angle-fill"></i> Unpin{% else %}<i class="bi bi-pin"></i> Pin{% endif %}
+                        </button>
+                    </form>
+
+                    <form action="{% url 'notes:favorite-note'  note.id%}" method="post" class = 'd-inline'>
+                        {% csrf_token %}
+                        <button  note-is-fav = {{note.is_favorite}} type = 'submit' class = 'btn fav-btn'>
+                            {% if note.is_favorite %}
+                                <i style = "font-size: 1.9rem; color:gold;"  class="bi bi-star-fill favorite_icon"></i>
+                            {% else %}
+                                <i style = "font-size: 1.9rem; color:gold;" class="bi bi-star favorite_icon"></i>
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-message">No notes yet. Start by adding one! 🚀</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form id="deleteForm" method="post" data-base-url="{% url 'notes:delete-note' 0 %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

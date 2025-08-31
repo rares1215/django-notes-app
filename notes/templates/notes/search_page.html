@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Search Page
+{% endblock title %}
+
+{% block content %}
+    {% if searched %}
+<div class="notes-container">
+    <div class="notes-header">
+        <h1>📝 You Searched for {{searched}}</h1>
+    </div>
+
+    <div class="notes-list">
+        {% for note in notes %}
+            <div class="note-card">
+                <div class="note-header">
+                    <h2>{{ note.title }}</h2>
+                    <span class="note-date">{{ note.date|date:"M d, Y H:i" }}</span>
+                    <span class="note-date">{{note.category}}</span>
+                </div>
+                <p class="note-content">{{ note.content }}</p>
+            </div>
+        {% empty %}
+            <p class="empty-message">There is no note with this name!</p>
+        {% endfor %}
+    </div>
+</div>
+    {% else %}
+    <div class = 'home-page-div'>
+        <h1>You didn t searched for anything</h1>
+    </div>
+    {% endif %}
+{% endblock content %}

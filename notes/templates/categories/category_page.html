@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    {{category.name}}
+{% endblock title %}
+
+{% block content %}
+<div class="notes-container">
+    <div class="notes-header">
+        <h1><i class="bi bi-journal-bookmark-fill"></i> {{category.name}} Notes</h1>
+        <a href="{% url 'notes:add-note-category' category.id%}" class="btn btn-primary"><i class="bi bi-patch-plus-fill"></i> Add Note</a>
+    </div>
+
+    <div class="notes-list">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="toast align-items-center text-bg-{{ message.tags }} border-0 mb-2"
+                    role="alert" aria-live="assertive" aria-atomic="true"
+                    data-bs-delay="4000" data-bs-autohide="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% for note in notes %}
+            <div class="note-card">
+                <div class="note-header">
+                    <h2>{{ note.title }}</h2>
+                    <span class="note-date">{{ note.date|date:"M d, Y H:i" }}</span>
+                </div>
+                <p class="note-content">{{ note.content }}</p>
+
+                <div class="note-actions">
+                    <button type="button" class="btn btn-danger" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteModalCategory"
+                        data-category-id = "{{category.id}}" 
+                        data-note-id="{{ note.id }}"
+                        data-note-title = "{{note.title}}"
+                        >
+                        <i class="bi bi-trash-fill"></i> Delete
+                    </button>
+                    <a href="{% url 'notes:update-note-category' note.id category.id %}" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i> Edit</a>
+                    <form action="{% url 'notes:pin-category-note'  note.id category.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class=" btn btn-pin">
+                            {% if note.is_pinned %}<i class="bi bi-pin-angle-fill"></i> Unpin{% else %}<i class="bi bi-pin"></i> Pin{% endif %}
+                        </button>
+                    </form>
+
+                    <form action="{% url 'notes:favorite-category-note'  note.id category.id%}" method="post" class = 'd-inline'>
+                        {% csrf_token %}
+                        <button  note-is-fav = {{note.is_favorite}} type = 'submit' class = 'btn fav-btn'>
+                            {% if note.is_favorite %}
+                                <i style = "font-size: 1.9rem; color:gold;"  class="bi bi-star-fill favorite_icon"></i>
+                            {% else %}
+                                <i style = "font-size: 1.9rem; color:gold;" class="bi bi-star favorite_icon"></i>
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-message">No notes yet. Start by adding one! 🚀</p>
+        {% endfor %}
+
+        <div class="modal fade" id='deleteModalCategory' tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id='deleteFormCategory' data-base-url="{% url 'notes:delete-note-category' 'NOTE_ID' 'CATEGORY_ID' %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">🗑 Delete</button>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

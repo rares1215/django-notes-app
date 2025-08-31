@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Update Category
+{% endblock title %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-card">
+        <h1><span class="icon"><i class="bi bi-pencil-square"></i></span>Update a New Category</h1>
+        <form autocomplete = 'off' action="" method="post">
+            {% csrf_token %}
+            <label for="title">Name</label>
+            {{ form.name }}
+
+            <button type="submit">Save Category</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

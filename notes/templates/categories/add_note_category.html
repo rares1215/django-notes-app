@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Note
+{% endblock title %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-card">
+        <h1><span class="icon"><i class="bi bi-plus-circle-dotted"></i></span>Add a New Note</h1>
+        <form action="{% url 'notes:add-note-category' category.id%}" method="post">
+            {% csrf_token %}
+            
+            <label for="title">Title</label>
+            {{ form.title }}
+
+            <label for="content">Content</label>
+            {{ form.content }}
+
+            <button type="submit">Save Note</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

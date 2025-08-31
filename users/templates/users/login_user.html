@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login User
+{% endblock title %}
+
+{% block content %}
+<div class = "auth-body">
+<div class="auth-container">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="toast align-items-center text-bg-{{ message.tags }} border-0 mb-2"
+                    role="alert" aria-live="assertive" aria-atomic="true"
+                    data-bs-delay="4000" data-bs-autohide="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    <div class="auth-card">
+        <h1>Welcome Back!</h1>
+        <p class="subtitle">Login to continue managing your notes</p>
+
+        <form action="{% url 'users:login-user' %}" method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="auth-btn">Login</button>
+        </form>
+
+        <p class="redirect-text">
+            Don’t have an account? 
+            <a href="{% url 'users:register-user' %}">Register here</a>
+        </p>
+    </div>
+</div>
+</div>
+{% endblock content %}
